@@ -1,0 +1,11 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+includedir=${prefix}/include
+libdir=${exec_prefix}/lib
+
+Name: lottiequick
+Description: Qt Quick library for rendering Lottie animations
+Version: @PROJECT_VERSION@
+Cflags: -I${includedir}/lottiequick
+Libs: -L${libdir} -llottiequick
+Requires: Qt5Core Qt5Quick

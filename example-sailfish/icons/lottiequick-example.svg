@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="86px" height="86px" viewBox="0 0 86 86" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>lottie-quick-example</title>
+    <defs>
+        <linearGradient x1="15.0601122%" y1="15.0605806%" x2="99.5115925%" y2="99.5120609%" id="linearGradient-1">
+            <stop stop-color="#1AFFED" offset="0%"></stop>
+            <stop stop-color="#00B3A5" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="lottie-quick-example" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M43,0.3 C66.5825588,0.3 85.7,19.4174412 85.7,43 L85.7,84.28 C85.7,85.0642443 85.0642443,85.7 84.28,85.7 L43,85.7 C19.4174412,85.7 0.3,66.5825588 0.3,43 C0.3,19.4174412 19.4174412,0.3 43,0.3 Z" id="Base" fill="url(#linearGradient-1)" fill-rule="nonzero"></path>
+        <path d="M45.7624422,23.2217273 C45.7624422,18.8034493 42.1807202,15.2217273 37.7624422,15.2217273 C29.0073075,15.2217273 20,23.2217273 20,64" id="L1" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" transform="translate(32.881221, 39.610864) rotate(180.000000) translate(-32.881221, -39.610864) "></path>
+        <path d="M20,51.2103331 C42.452991,38.047702 47.4899395,69.6146679 62.4899395,69.6146679 C66.9082175,69.6146679 70.4899395,66.0329459 70.4899395,61.6146679 C70.4899395,57.1963899 66.9082175,53.6146679 62.4899395,53.6146679" id="L2" stroke="#027A87" stroke-width="8" stroke-linecap="round" transform="translate(45.244970, 58.807334) rotate(180.000000) translate(-45.244970, -58.807334) "></path>
+        <circle id="Circle" fill="#FFFFFF" cx="61" cy="56" r="4"></circle>
+    </g>
+</svg>

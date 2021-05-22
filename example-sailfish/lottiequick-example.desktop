@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Name=Lottie Quick
+Icon=lottie-quick-example
+Exec=lottie-quick-example

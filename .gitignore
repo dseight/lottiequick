@@ -1,0 +1,14 @@
+.idea
+*_autogen/
+*.a
+*.list
+*.so
+*.so.*
+cmake_install.cmake
+cmake-build-*
+CMakeCache.txt
+CMakeFiles
+install_manifest.txt
+installroot
+Makefile
+RPMS
