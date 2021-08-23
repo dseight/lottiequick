@@ -42,9 +42,12 @@ target_include_directories(LottieQuick PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/lottiequick>)
 
-target_link_libraries(LottieQuick
-        PUBLIC Qt5::Quick
-        PRIVATE ZLIB::ZLIB rlottie)
+target_link_libraries(LottieQuick PUBLIC Qt5::Quick PRIVATE rlottie)
+
+if (LOTTIE_QUICK_WITH_ZLIB)
+    target_link_libraries(LottieQuick PRIVATE ZLIB::ZLIB)
+    target_compile_definitions(LottieQuick PRIVATE WITH_ZLIB)
+endif ()
 
 # Generate pkg-config file
 

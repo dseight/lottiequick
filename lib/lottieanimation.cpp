@@ -2,7 +2,9 @@
 #include "lottierenderthread.h"
 #include <rlottie.h>
 #include <sstream>
+#ifdef WITH_ZLIB
 #include <zlib.h>
+#endif
 #include <QQuickWindow>
 #include <QSGGeometryNode>
 #include <QSGSimpleTextureNode>
@@ -21,6 +23,7 @@ std::string loadFileContent(const QString &path)
         return {};
     }
 
+#ifdef WITH_ZLIB
     // Handle gzipped files as well (also known as TGS format, for Telegram stickers)
     char buf[BUFSIZ];
     std::stringstream ss;
@@ -41,6 +44,9 @@ std::string loadFileContent(const QString &path)
     }
 
     return ss.str();
+#else
+    return file.readAll().toStdString();
+#endif
 }
 
 } // namespace
