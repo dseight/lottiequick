@@ -34,7 +34,7 @@ Summary: Example for %{name}
 %cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DARCH="%{_arch}" \
-    -DBUILD_LOTTIE_QUICK_SAILFISH_EXAMPLE=ON
+    -DLOTTIE_QUICK_BUILD_SAILFISH_EXAMPLE=ON
 %make_build
 
 %install
