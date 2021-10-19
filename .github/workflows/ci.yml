@@ -12,6 +12,9 @@ jobs:
 
   sailfishos:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: ['aarch64', 'armv7hl', 'i486']
     steps:
       -
         name: Checkout
@@ -23,7 +26,7 @@ jobs:
         uses: dseight/sailfishos-build-action@master
         with:
           version: 4.1.0.24
-          arch: armv7hl
+          arch: ${{ matrix.arch }}
 
   ubuntu:
     runs-on: ubuntu-latest
