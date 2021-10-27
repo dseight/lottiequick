@@ -1,0 +1,58 @@
+name: "CodeQL"
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ master ]
+  schedule:
+    - cron: '45 15 * * 0'
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    env:
+      OPTFLAGS: -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'cpp' ]
+
+    steps:
+    -
+      name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+          submodules: recursive
+    -
+      name: Install dependencies
+      run: >
+        sudo apt-get update
+        && sudo apt-get install -yq qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev
+    -
+      name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: ${{ matrix.language }}
+    -
+      name: Configure and build
+      env:
+        CFLAGS: ${{ env.OPTFLAGS }}
+        CXXFLAGS: ${{ env.OPTFLAGS }}
+      run: |
+        cmake \
+          -DCMAKE_VERBOSE_MAKEFILE=ON \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DLOTTIE_QUICK_BUILD_EXAMPLE=ON \
+          .
+        make -j$(getconf _NPROCESSORS_ONLN)
+    -
+      name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
