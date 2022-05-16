@@ -20,10 +20,10 @@ Requires: %{name} = %{version}-%{release}
 %description devel
 %{summary}.
 
-%package example
+%package -n org.example.lottiequick
 Summary: Example for %{name}
 
-%description example
+%description -n org.example.lottiequick
 %{summary}.
 
 %prep
@@ -50,8 +50,8 @@ Summary: Example for %{name}
 %{_includedir}/%{name}/lottiequickglobal.h
 %{_includedir}/%{name}/lottieanimation.h
 
-%files example
-%{_bindir}/%{name}-example
-%{_datadir}/%{name}-example
-%{_datadir}/applications/%{name}-example.desktop
-%{_datadir}/icons/hicolor/*/apps/%{name}-example.png
+%files -n org.example.lottiequick
+%{_bindir}/org.example.lottiequick
+%{_datadir}/org.example.lottiequick
+%{_datadir}/applications/org.example.lottiequick.desktop
+%{_datadir}/icons/hicolor/*/apps/org.example.lottiequick.png

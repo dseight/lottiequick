@@ -2,9 +2,9 @@
 Type=Application
 X-Nemo-Application-Type=silica-qt5
 Name=Lottie Quick
-Icon=lottiequick-example
-Exec=lottiequick-example
+Icon=org.example.lottiequick
+Exec=org.example.lottiequick
 
 [X-Sailjail]
-OrganizationName=com.dseight
+OrganizationName=org.example
 ApplicationName=lottiequick
