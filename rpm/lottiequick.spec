@@ -40,10 +40,6 @@ Summary: Example for %{name}
 %install
 %make_install
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
-
 %files
 %{_libdir}/liblottiequick.so.*
 
