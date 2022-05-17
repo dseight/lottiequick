@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Name=Lottie Quick
+Icon=org.example.lottiequick
+Exec=org.example.lottiequick
+
+[X-Sailjail]
+OrganizationName=org.example
+ApplicationName=lottiequick
