@@ -3,6 +3,7 @@
 #include <rlottie.h>
 #include <sstream>
 #ifdef WITH_ZLIB
+#define ZLIB_CONST
 #include <zlib.h>
 #endif
 #include <QQuickWindow>
@@ -23,30 +24,55 @@ std::string loadFileContent(const QString &path)
         return {};
     }
 
+    std::string data = file.readAll().toStdString();
+
+    if (data.size() >= 4 && data[0] == 0x1f && data[1] == 0x8b) {
 #ifdef WITH_ZLIB
-    // Handle gzipped files as well (also known as TGS format, for Telegram stickers)
-    char buf[BUFSIZ];
-    std::stringstream ss;
-    gzFile gzf = gzdopen(file.handle(), "r");
+        // Handle gzipped files as well (also known as TGS format, for Telegram stickers)
+        z_stream stream;
+        stream.zalloc = Z_NULL;
+        stream.zfree = Z_NULL;
+        stream.opaque = Z_NULL;
+        stream.avail_in = data.size();
+        stream.next_in = reinterpret_cast<const Bytef*>(data.data());
 
-    while (true) {
-        int len = gzread(gzf, buf, sizeof(buf));
-
-        if (len < 0) {
-            qDebug() << "Failed to read" << path << "content";
-            return {};
+        int ret = inflateInit2(&stream, 15 + 16);
+        if (ret != Z_OK) {
+            qDebug() << path << "inflateInit2 error";
+            return std::string();
         }
 
-        ss.write(buf, len);
+        std::string result;
 
-        if (static_cast<size_t>(len) < sizeof(buf))
-            break;
+        do {
+            stream.avail_out = BUFSIZ;
+            result.resize(stream.total_out + stream.avail_out);
+            stream.next_out = reinterpret_cast<Bytef*>(&result[0] + stream.total_out);
+
+            ret = inflate(&stream, Z_NO_FLUSH);
+
+            switch (ret) {
+            case Z_NEED_DICT:
+            case Z_DATA_ERROR:
+            case Z_STREAM_ERROR:
+            case Z_MEM_ERROR:
+                qDebug() << "Failed to read" << path << "content";
+                inflateEnd(&stream);
+                return std::string();
+            }
+        } while (stream.avail_out == 0);
+
+        result.resize(stream.total_out);
+        inflateEnd(&stream);
+
+        return result;
+#else
+        qDebug() << path << ": could not read unsupported format (gzipped)";
+        return std::string();
+#endif
     }
 
-    return ss.str();
-#else
-    return file.readAll().toStdString();
-#endif
+    return data;
 }
 
 } // namespace
